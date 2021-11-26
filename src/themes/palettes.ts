@@ -12,4 +12,6 @@ export const palettes = {
   offBlue: '#EFF5FB',
   offGreen: '#EEFAF6',
   offRed: '#FCECEF',
+  dark: '#212121',
+  offDark: '#2E2E2E',
 };

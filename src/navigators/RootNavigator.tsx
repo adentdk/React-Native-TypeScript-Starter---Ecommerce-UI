@@ -1,8 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/Home/HomeScreen';
 import LoginScreen from '../screens/Login/LoginScreen';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import Icon from '../components/Icon';
+import spacing from '../themes/spacing';
 
 const {Navigator, Screen} =
   createNativeStackNavigator<INavigator.RootNavigatorStackParamList>();
@@ -20,11 +23,12 @@ export const RootNavigator = () => {
           headerRight: () => {
             return (
               <View style={{flexDirection: 'row'}}>
-                <Text>halo</Text>
-                <Text>hali</Text>
+                <Icon size={20} style={{marginRight: spacing[3]}} name="bell" />
+                <Icon size={20} name="shopping-cart" />
               </View>
             );
           },
+          headerShadowVisible: false,
         })}
         name="Home"
         component={HomeScreen}
