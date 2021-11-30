@@ -1,23 +1,107 @@
-export function shadeColor(color = '#000000', percent = 0) {
-  var R = parseInt(color.substring(1, 3), 16);
-  var G = parseInt(color.substring(3, 5), 16);
-  var B = parseInt(color.substring(5, 7), 16);
-
-  R = parseInt((R * (100 + percent)) / 100, 10);
-  G = parseInt((G * (100 + percent)) / 100, 10);
-  B = parseInt((B * (100 + percent)) / 100, 10);
-
-  R = R < 255 ? R : 255;
-  G = G < 255 ? G : 255;
-  B = B < 255 ? B : 255;
-
-  var RR = R.toString(16).length === 1 ? '0' + R.toString(16) : R.toString(16);
-  var GG = G.toString(16).length === 1 ? '0' + G.toString(16) : G.toString(16);
-  var BB = B.toString(16).length === 1 ? '0' + B.toString(16) : B.toString(16);
-
-  return '#' + RR + GG + BB;
-}
-
-export default {
-  shadeColor,
+const pad = function (num, totalChars) {
+  const _pad = '0';
+  num = num + '';
+  while (num.length < totalChars) {
+    num = _pad + num;
+  }
+  return num;
 };
+
+// Ratio is between 0 and 1
+const changeColor = function (color, ratio, darker) {
+  // Trim trailing/leading whitespace
+  color = color.replace(/^\s*|\s*$/, '');
+
+  // Expand three-digit hex
+  color = color.replace(/^#?([a-f0-9])([a-f0-9])([a-f0-9])$/i, '#$1$1$2$2$3$3');
+
+  // Calculate ratio
+  const difference = Math.round(ratio * 256) * (darker ? -1 : 1),
+    // Determine if input is RGB(A)
+    rgb = color.match(
+      new RegExp(
+        '^rgba?\\(\\s*' +
+          '(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])' +
+          '\\s*,\\s*' +
+          '(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])' +
+          '\\s*,\\s*' +
+          '(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])' +
+          '(?:\\s*,\\s*' +
+          '(0|1|0?\\.\\d+))?' +
+          '\\s*\\)$',
+        'i',
+      ),
+    ),
+    alpha = !!rgb && rgb[4] != null ? rgb[4] : null,
+    // Convert hex to decimal
+    decimal = rgb
+      ? [rgb[1], rgb[2], rgb[3]]
+      : color
+          .replace(
+            /^#?([a-f0-9][a-f0-9])([a-f0-9][a-f0-9])([a-f0-9][a-f0-9])/i,
+            function () {
+              return (
+                parseInt(arguments[1], 16) +
+                ',' +
+                parseInt(arguments[2], 16) +
+                ',' +
+                parseInt(arguments[3], 16)
+              );
+            },
+          )
+          .split(/,/);
+  // Return RGB(A)
+  return rgb
+    ? 'rgb' +
+        (alpha !== null ? 'a' : '') +
+        '(' +
+        Math[darker ? 'max' : 'min'](
+          parseInt(decimal[0], 10) + difference,
+          darker ? 0 : 255,
+        ) +
+        ', ' +
+        Math[darker ? 'max' : 'min'](
+          parseInt(decimal[1], 10) + difference,
+          darker ? 0 : 255,
+        ) +
+        ', ' +
+        Math[darker ? 'max' : 'min'](
+          parseInt(decimal[2], 10) + difference,
+          darker ? 0 : 255,
+        ) +
+        (alpha !== null ? ', ' + alpha : '') +
+        ')'
+    : // Return hex
+      [
+        '#',
+        pad(
+          Math[darker ? 'max' : 'min'](
+            parseInt(decimal[0], 10) + difference,
+            darker ? 0 : 255,
+          ).toString(16),
+          2,
+        ),
+        pad(
+          Math[darker ? 'max' : 'min'](
+            parseInt(decimal[1], 10) + difference,
+            darker ? 0 : 255,
+          ).toString(16),
+          2,
+        ),
+        pad(
+          Math[darker ? 'max' : 'min'](
+            parseInt(decimal[2], 10) + difference,
+            darker ? 0 : 255,
+          ).toString(16),
+          2,
+        ),
+      ].join('');
+};
+const lighterColor = function (color, ratio) {
+  return changeColor(color, ratio, false);
+};
+const darkerColor = function (color, ratio) {
+  return changeColor(color, ratio, true);
+};
+
+export {lighterColor, darkerColor};
