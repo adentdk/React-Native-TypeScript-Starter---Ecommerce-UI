@@ -32,3 +32,5 @@ export const ScreenWrapper: React.FC<IScreenWrapper.IProps> = ({
     </>
   );
 };
+
+export default ScreenWrapper;

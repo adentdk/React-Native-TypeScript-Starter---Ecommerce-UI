@@ -9,6 +9,7 @@ export const Text: React.FC<IText.IProps> = ({
   fontFamily = 'regular',
   fontSize = 'md',
   color,
+  align = 'left',
   ...props
 }) => {
   const {theme} = useTheme();
@@ -19,6 +20,7 @@ export const Text: React.FC<IText.IProps> = ({
         {
           fontFamily: fonts.family[fontFamily],
           fontSize: fonts.size[fontSize],
+          textAlign: align,
           color: fontColor,
         },
         style,

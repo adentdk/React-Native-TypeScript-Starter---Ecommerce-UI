@@ -51,3 +51,5 @@ export const ProductCard: React.FC<IProductCard.IProps> = ({
     </View>
   );
 };
+
+export default ProductCard;

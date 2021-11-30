@@ -29,3 +29,5 @@ export const NewsCard: React.FC<INewsCard.IProps> = ({
     </View>
   );
 };
+
+export default NewsCard;
