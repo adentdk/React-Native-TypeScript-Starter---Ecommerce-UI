@@ -1,12 +1,13 @@
-import {shadeColor} from '../utils/color';
+import {darkerColor} from '../utils/color';
 import {palettes} from './palettes';
+import {ITheme} from './theme';
 
-export default {
+export const darkTheme: ITheme.ITheme = {
   isDark: true,
-  palettes,
   color: {
-    primary: shadeColor(palettes.blueOcean, -10),
+    primary: darkerColor(palettes.blueOcean, 0.3),
     background: palettes.dark,
+    backgroundSecondary: palettes.offDark,
     line: palettes.halfGrey,
     text: palettes.navyBlack,
     input: palettes.offDark,
@@ -14,5 +15,8 @@ export default {
     inputLabel: palettes.darkGrey,
     dim: palettes.halfGrey,
     error: palettes.redVelvet,
+    card: palettes.dark,
   },
 };
+
+export default darkTheme;

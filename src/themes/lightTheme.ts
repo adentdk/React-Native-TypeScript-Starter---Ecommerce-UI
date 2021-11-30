@@ -1,11 +1,12 @@
 import {palettes} from './palettes';
+import {ITheme} from './theme';
 
-export default {
+export const lightTheme: ITheme.ITheme = {
   isDark: false,
-  palettes,
   color: {
     primary: palettes.blueOcean,
     background: palettes.white,
+    backgroundSecondary: palettes.offGrey,
     line: palettes.halfGrey,
     text: palettes.navyBlack,
     input: palettes.offGrey,
@@ -13,5 +14,8 @@ export default {
     inputLabel: palettes.darkGrey,
     dim: palettes.halfGrey,
     error: palettes.redVelvet,
+    card: palettes.white,
   },
 };
+
+export default lightTheme;
