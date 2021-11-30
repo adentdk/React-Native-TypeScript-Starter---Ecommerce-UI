@@ -4,31 +4,37 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/Home/HomeScreen';
 import LoginScreen from '../screens/Login/LoginScreen';
 import {View} from 'react-native';
-import Icon from '../components/Icon';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 import spacing from '../themes/spacing';
+import {fonts} from '../themes';
 
 const {Navigator, Screen} =
-  createNativeStackNavigator<INavigator.RootNavigatorStackParamList>();
+  createNativeStackNavigator<INavigator.HomeNavigatorStackParamList>();
 
-export const RootNavigator = () => {
+export const HomeNavigator = () => {
   return (
     <Navigator>
       <Screen
         options={() => ({
           title: 'Mega Mall',
           headerTitleStyle: {
-            fontFamily: 'DMSans-Bold',
+            fontFamily: fonts.family.bold,
+            fontSize: fonts.size.xl,
           },
           headerTitleAlign: 'center',
-          headerRight: () => {
+          headerRight: ({tintColor}) => {
             return (
               <View style={{flexDirection: 'row'}}>
-                <Icon size={20} style={{marginRight: spacing[3]}} name="bell" />
-                <Icon size={20} name="shopping-cart" />
+                <IonIcon
+                  color={tintColor}
+                  size={24}
+                  style={{marginRight: spacing[3]}}
+                  name="notifications-outline"
+                />
+                <IonIcon color={tintColor} size={24} name="cart-outline" />
               </View>
             );
           },
-          headerShadowVisible: false,
         })}
         name="Home"
         component={HomeScreen}
@@ -38,4 +44,4 @@ export const RootNavigator = () => {
   );
 };
 
-export default RootNavigator;
+export default HomeNavigator;

@@ -1,5 +1,5 @@
 declare namespace INavigator {
-  export type RootNavigatorStackParamList = {
+  export type HomeNavigatorStackParamList = {
     Home: undefined;
     Login: undefined;
   };
