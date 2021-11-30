@@ -7,7 +7,7 @@ export const lightTheme: ITheme.ITheme = {
     primary: palettes.blueOcean,
     background: palettes.white,
     backgroundSecondary: palettes.offGrey,
-    line: palettes.halfGrey,
+    line: palettes.softGrey,
     text: palettes.navyBlack,
     input: palettes.offGrey,
     inputPlaceholder: palettes.halfGrey,

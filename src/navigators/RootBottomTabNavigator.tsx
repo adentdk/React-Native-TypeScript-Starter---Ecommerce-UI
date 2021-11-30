@@ -54,7 +54,7 @@ function RootBottomTabNavigator() {
       <Tab.Screen
         name="Account"
         options={{
-          tabBarLabel: 'account',
+          tabBarLabel: 'login',
           tabBarIcon: ({color, size}) => (
             <IonIcon name="person-outline" color={color} size={size} />
           ),

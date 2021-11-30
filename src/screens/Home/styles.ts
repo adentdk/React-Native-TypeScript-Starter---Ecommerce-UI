@@ -89,4 +89,9 @@ export const useStyles = (theme: ITheme.ITheme) =>
     newsCardItemFirst: {
       borderTopWidth: 0,
     },
+    outterButton: {
+      marginHorizontal: spacing[5],
+    },
   });
+
+export default useStyles;

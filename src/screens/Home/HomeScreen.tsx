@@ -2,290 +2,297 @@ import * as React from 'react';
 import {withTranslation} from 'react-i18next';
 import {Image, ScrollView, View} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+
 import Card from '../../components/Card';
-import {NewsCard} from '../../components/NewsCard';
-import {ProductCard} from '../../components/ProductCard';
+import MustLoginModal from '../../components/MustLoginModal';
+import NewsCard from '../../components/NewsCard';
+import OutlinedButton from '../../components/OutlinedButton';
+import ProductCard from '../../components/ProductCard';
 import ProductPromotionCard from '../../components/ProductPromotionCard';
-import {ScreenWrapper} from '../../components/ScreenWrapper';
-import {Text} from '../../components/Text';
+import ScreenWrapper from '../../components/ScreenWrapper';
+import Text from '../../components/Text';
 import TextInput from '../../components/TextInput';
+
 import {palettes, useTheme} from '../../themes';
 import {lighterColor} from '../../utils/color';
-import {IHome} from './Home';
-import {useStyles} from './styles';
 
-export const HomeScreen: React.FC<IHome.IProps> = ({t, i18n}) => {
+import {IHome} from './Home';
+import useStyles from './styles';
+
+export const HomeScreen: React.FC<IHome.IProps> = ({t}) => {
   const {theme} = useTheme();
   const styles = useStyles(theme);
 
-  React.useEffect(() => {
-    i18n.changeLanguage('id');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  React.useEffect(() => {}, []);
 
   return (
-    <ScreenWrapper
-      component="scroll"
-      statusBarColor={palettes.white}
-      statusBarStyle="dark-content"
-      style={styles.container}>
-      <View style={styles.mainSection}>
-        <TextInput
-          containerStyle={styles.searchBar}
-          placeholder={t('Search Product')}
-        />
+    <>
+      <ScreenWrapper
+        component="scroll"
+        statusBarColor={palettes.white}
+        statusBarStyle="dark-content"
+        style={styles.container}>
+        <View style={styles.mainSection}>
+          <TextInput
+            containerStyle={styles.searchBar}
+            placeholder={t('Search Product')}
+          />
 
-        {/* Carousel */}
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          bounces={false}
-          alwaysBounceHorizontal={false}
-          pagingEnabled
-          style={styles.carouselWrapper}>
-          <View style={styles.carouselItem}>
-            <Image
-              source={require('../../assets/images/Promo.png')}
-              style={styles.carouselItemImage}
-            />
-          </View>
-          <View style={styles.carouselItem}>
-            <Image
-              source={require('../../assets/images/Promo.png')}
-              style={styles.carouselItemImage}
-            />
-          </View>
-          <View style={styles.carouselItem}>
-            <Image
-              source={require('../../assets/images/Promo.png')}
-              style={styles.carouselItemImage}
-            />
-          </View>
-          <View style={styles.carouselItem}>
-            <Image
-              source={require('../../assets/images/Promo.png')}
-              style={styles.carouselItemImage}
-            />
-          </View>
-          <View style={styles.carouselItem}>
-            <Image
-              source={require('../../assets/images/Promo.png')}
-              style={styles.carouselItemImage}
-            />
-          </View>
-          <View style={styles.carouselItem}>
-            <Image
-              source={require('../../assets/images/Promo.png')}
-              style={styles.carouselItemImage}
-            />
-          </View>
-        </ScrollView>
-
-        <Card
-          style={styles.categoriesWrapper}
-          title={t('Categories')}
-          actionText={t('See All')}>
+          {/* Carousel */}
           <ScrollView
             showsHorizontalScrollIndicator={false}
             horizontal
             bounces={false}
             alwaysBounceHorizontal={false}
-            style={styles.categoryList}>
-            {CATEGORIES_DATA.map((category, index) => (
-              <View key={index} style={styles.categoryItem}>
-                <View
-                  style={[
-                    styles.categoryIconWrapper,
-                    {backgroundColor: lighterColor(category.color, 0.72)},
-                  ]}>
-                  <IonIcon
-                    name={category.icon}
-                    size={24}
-                    color={category.color}
-                  />
+            pagingEnabled
+            style={styles.carouselWrapper}>
+            <View style={styles.carouselItem}>
+              <Image
+                source={require('../../assets/images/Promo.png')}
+                style={styles.carouselItemImage}
+              />
+            </View>
+            <View style={styles.carouselItem}>
+              <Image
+                source={require('../../assets/images/Promo.png')}
+                style={styles.carouselItemImage}
+              />
+            </View>
+            <View style={styles.carouselItem}>
+              <Image
+                source={require('../../assets/images/Promo.png')}
+                style={styles.carouselItemImage}
+              />
+            </View>
+            <View style={styles.carouselItem}>
+              <Image
+                source={require('../../assets/images/Promo.png')}
+                style={styles.carouselItemImage}
+              />
+            </View>
+            <View style={styles.carouselItem}>
+              <Image
+                source={require('../../assets/images/Promo.png')}
+                style={styles.carouselItemImage}
+              />
+            </View>
+            <View style={styles.carouselItem}>
+              <Image
+                source={require('../../assets/images/Promo.png')}
+                style={styles.carouselItemImage}
+              />
+            </View>
+          </ScrollView>
+
+          <Card
+            style={styles.categoriesWrapper}
+            title={t('Categories')}
+            actionText={t('See All')}>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              bounces={false}
+              alwaysBounceHorizontal={false}
+              style={styles.categoryList}>
+              {CATEGORIES_DATA.map((category, index) => (
+                <View key={index} style={styles.categoryItem}>
+                  <View
+                    style={[
+                      styles.categoryIconWrapper,
+                      {backgroundColor: lighterColor(category.color, 0.72)},
+                    ]}>
+                    <IonIcon
+                      name={category.icon}
+                      size={24}
+                      color={category.color}
+                    />
+                  </View>
+                  <Text fontFamily="medium" fontSize="sm">
+                    {t(category.name)}
+                  </Text>
                 </View>
-                <Text fontFamily="medium" fontSize="sm">
-                  {t(category.name)}
-                </Text>
-              </View>
-            ))}
-          </ScrollView>
-        </Card>
-      </View>
-      <View style={styles.productSection}>
-        <Card
-          style={styles.productsWrapper}
-          title={t('Featured Product')}
-          actionText={t('See All')}>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            bounces={false}
-            alwaysBounceHorizontal={false}
-            pagingEnabled>
-            {PRODUCTS_DATA.map((product, index) => (
-              <ProductCard
-                key={index}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={{uri: product.image}}
-                totalReviews={product.totalReviews}
-                rating={product.rating}
-                style={[
-                  styles.productCardItem,
-                  index === 0 && styles.productCardItemFirst,
-                ]}
-              />
-            ))}
-          </ScrollView>
-        </Card>
+              ))}
+            </ScrollView>
+          </Card>
+        </View>
+        <View style={styles.productSection}>
+          <Card
+            style={styles.productsWrapper}
+            title={t('Featured Product')}
+            actionText={t('See All')}>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              bounces={false}
+              alwaysBounceHorizontal={false}
+              pagingEnabled>
+              {PRODUCTS_DATA.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={{uri: product.image}}
+                  totalReviews={product.totalReviews}
+                  rating={product.rating}
+                  style={[
+                    styles.productCardItem,
+                    index === 0 && styles.productCardItemFirst,
+                  ]}
+                />
+              ))}
+            </ScrollView>
+          </Card>
 
-        <ProductPromotionCard
-          style={styles.productPromotionCard}
-          title="C02 - Cable Multifunction"
-          image={{
-            uri: 'https://6f836c397566f8a68572-e2de800189bc8603e0746245fbc4e3cb.ssl.cf3.rackcdn.com/c02-min-N2kKQduP-zoom.png',
-          }}
-        />
+          <ProductPromotionCard
+            style={styles.productPromotionCard}
+            title="C02 - Cable Multifunction"
+            image={{
+              uri: 'https://6f836c397566f8a68572-e2de800189bc8603e0746245fbc4e3cb.ssl.cf3.rackcdn.com/c02-min-N2kKQduP-zoom.png',
+            }}
+          />
 
-        <Card
-          style={styles.productsWrapper}
-          title={t('Best Sellers')}
-          actionText={t('See All')}>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            bounces={false}
-            alwaysBounceHorizontal={false}
-            pagingEnabled>
-            {PRODUCTS_DATA.map((product, index) => (
-              <ProductCard
-                key={index}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={{uri: product.image}}
-                totalReviews={product.totalReviews}
-                rating={product.rating}
-                style={[
-                  styles.productCardItem,
-                  index === 0 && styles.productCardItemFirst,
-                ]}
-              />
-            ))}
-          </ScrollView>
-        </Card>
+          <Card
+            style={styles.productsWrapper}
+            title={t('Best Sellers')}
+            actionText={t('See All')}>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              bounces={false}
+              alwaysBounceHorizontal={false}
+              pagingEnabled>
+              {PRODUCTS_DATA.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={{uri: product.image}}
+                  totalReviews={product.totalReviews}
+                  rating={product.rating}
+                  style={[
+                    styles.productCardItem,
+                    index === 0 && styles.productCardItemFirst,
+                  ]}
+                />
+              ))}
+            </ScrollView>
+          </Card>
 
-        <ProductPromotionCard
-          style={styles.productPromotionCard}
-          title="C02 - Cable Multifunction"
-          image={{
-            uri: 'https://6f836c397566f8a68572-e2de800189bc8603e0746245fbc4e3cb.ssl.cf3.rackcdn.com/c02-min-N2kKQduP-zoom.png',
-          }}
-          color={palettes.blueOcean}
-        />
+          <ProductPromotionCard
+            style={styles.productPromotionCard}
+            title="C02 - Cable Multifunction"
+            image={{
+              uri: 'https://6f836c397566f8a68572-e2de800189bc8603e0746245fbc4e3cb.ssl.cf3.rackcdn.com/c02-min-N2kKQduP-zoom.png',
+            }}
+            color={palettes.blueOcean}
+          />
 
-        <Card
-          style={styles.productsWrapper}
-          title={t('New Arrivals')}
-          actionText={t('See All')}>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            bounces={false}
-            alwaysBounceHorizontal={false}
-            pagingEnabled>
-            {PRODUCTS_DATA.map((product, index) => (
-              <ProductCard
+          <Card
+            style={styles.productsWrapper}
+            title={t('New Arrivals')}
+            actionText={t('See All')}>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              bounces={false}
+              alwaysBounceHorizontal={false}
+              pagingEnabled>
+              {PRODUCTS_DATA.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={{uri: product.image}}
+                  totalReviews={product.totalReviews}
+                  rating={product.rating}
+                  style={[
+                    styles.productCardItem,
+                    index === 0 && styles.productCardItemFirst,
+                  ]}
+                />
+              ))}
+            </ScrollView>
+          </Card>
+          <Card
+            style={styles.productsWrapper}
+            title={t('Top Rated Products')}
+            actionText={t('See All')}>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              bounces={false}
+              alwaysBounceHorizontal={false}
+              pagingEnabled>
+              {PRODUCTS_DATA.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={{uri: product.image}}
+                  totalReviews={product.totalReviews}
+                  rating={product.rating}
+                  style={[
+                    styles.productCardItem,
+                    index === 0 && styles.productCardItemFirst,
+                  ]}
+                />
+              ))}
+            </ScrollView>
+          </Card>
+          <Card
+            style={styles.productsWrapper}
+            title={t('Special Offers')}
+            actionText={t('See All')}>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              bounces={false}
+              alwaysBounceHorizontal={false}
+              pagingEnabled>
+              {PRODUCTS_DATA.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={{uri: product.image}}
+                  totalReviews={product.totalReviews}
+                  rating={product.rating}
+                  style={[
+                    styles.productCardItem,
+                    index === 0 && styles.productCardItemFirst,
+                  ]}
+                />
+              ))}
+            </ScrollView>
+          </Card>
+        </View>
+        <View style={styles.footer}>
+          <Card title={t('Latest News')}>
+            {NEWS_DATA.map((news, index) => (
+              <NewsCard
                 key={index}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={{uri: product.image}}
-                totalReviews={product.totalReviews}
-                rating={product.rating}
+                title={news.title}
+                description={news.description}
+                image={news.image}
+                timestamp={news.timestamp}
                 style={[
-                  styles.productCardItem,
-                  index === 0 && styles.productCardItemFirst,
+                  styles.newsCardItem,
+                  index === 0 && styles.newsCardItemFirst,
                 ]}
               />
             ))}
-          </ScrollView>
-        </Card>
-        <Card
-          style={styles.productsWrapper}
-          title={t('Top Rated Products')}
-          actionText={t('See All')}>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            bounces={false}
-            alwaysBounceHorizontal={false}
-            pagingEnabled>
-            {PRODUCTS_DATA.map((product, index) => (
-              <ProductCard
-                key={index}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={{uri: product.image}}
-                totalReviews={product.totalReviews}
-                rating={product.rating}
-                style={[
-                  styles.productCardItem,
-                  index === 0 && styles.productCardItemFirst,
-                ]}
-              />
-            ))}
-          </ScrollView>
-        </Card>
-        <Card
-          style={styles.productsWrapper}
-          title={t('Special Offers')}
-          actionText={t('See All')}>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            bounces={false}
-            alwaysBounceHorizontal={false}
-            pagingEnabled>
-            {PRODUCTS_DATA.map((product, index) => (
-              <ProductCard
-                key={index}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={{uri: product.image}}
-                totalReviews={product.totalReviews}
-                rating={product.rating}
-                style={[
-                  styles.productCardItem,
-                  index === 0 && styles.productCardItemFirst,
-                ]}
-              />
-            ))}
-          </ScrollView>
-        </Card>
-      </View>
-      <View style={styles.footer}>
-        <Card title={t('Latest News')}>
-          {NEWS_DATA.map((news, index) => (
-            <NewsCard
-              key={index}
-              title={news.title}
-              description={news.description}
-              image={news.image}
-              timestamp={news.timestamp}
-              style={[
-                styles.newsCardItem,
-                index === 0 && styles.newsCardItemFirst,
-              ]}
-            />
-          ))}
-        </Card>
-      </View>
-    </ScreenWrapper>
+
+            <OutlinedButton title="See All News" style={styles.outterButton} />
+          </Card>
+        </View>
+      </ScreenWrapper>
+      <MustLoginModal />
+    </>
   );
 };
 
