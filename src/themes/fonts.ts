@@ -13,6 +13,7 @@ export const fonts = {
     md: 14,
     lg: 16,
     xl: 18,
+    xxl: 20,
   },
 };
 
