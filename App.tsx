@@ -1,12 +1,19 @@
-import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import RootNavigator from './src/navigators/RootNavigator';
+
+import {Provider as StoreProvider} from 'react-redux';
+import {AppNavigator} from './src/navigators/AppNavigator';
+import {store} from './src/store/index';
+import {ThemeProvider} from './src/themes';
+
+import './src/i18n';
 
 const App: React.FC = () => {
   return (
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
+    <StoreProvider store={store}>
+      <ThemeProvider>
+        <AppNavigator />
+      </ThemeProvider>
+    </StoreProvider>
   );
 };
 
