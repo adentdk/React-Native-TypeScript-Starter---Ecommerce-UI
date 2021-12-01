@@ -20,6 +20,7 @@ export const useStyles = (theme: ITheme.ITheme) =>
       minWidth: 130,
       minHeight: 125,
       resizeMode: 'cover',
+      backgroundColor: theme.color.background,
     },
     productCardFooter: {
       flexDirection: 'row',

@@ -1,6 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import OnProgressScreen from '../screens/OnProgress';
 import {fonts, useTheme} from '../themes';
 import HomeNavigator from './HomeNavigator';
 
@@ -11,7 +12,6 @@ function RootBottomTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarActiveTintColor: theme.color.primary,
         tabBarHideOnKeyboard: true,
         headerShadowVisible: false,
@@ -24,6 +24,7 @@ function RootBottomTabNavigator() {
       <Tab.Screen
         name="MainStack"
         options={{
+          headerShown: false,
           tabBarLabel: 'home',
           tabBarIcon: ({color, size}) => (
             <IonIcon name="home-outline" color={color} size={size} />
@@ -39,7 +40,7 @@ function RootBottomTabNavigator() {
             <IonIcon name="heart-outline" color={color} size={size} />
           ),
         }}
-        component={HomeNavigator}
+        component={OnProgressScreen}
       />
       <Tab.Screen
         name="OrderStack"
@@ -49,7 +50,7 @@ function RootBottomTabNavigator() {
             <IonIcon name="basket-outline" color={color} size={size} />
           ),
         }}
-        component={HomeNavigator}
+        component={OnProgressScreen}
       />
       <Tab.Screen
         name="Account"
@@ -59,7 +60,7 @@ function RootBottomTabNavigator() {
             <IonIcon name="person-outline" color={color} size={size} />
           ),
         }}
-        component={HomeNavigator}
+        component={OnProgressScreen}
       />
     </Tab.Navigator>
   );

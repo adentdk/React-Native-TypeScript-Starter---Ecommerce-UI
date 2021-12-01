@@ -6,12 +6,13 @@ import LoginScreen from '../screens/Login/LoginScreen';
 import {View} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import spacing from '../themes/spacing';
-import {fonts} from '../themes';
+import {fonts, useTheme} from '../themes';
 
 const {Navigator, Screen} =
   createNativeStackNavigator<INavigator.HomeNavigatorStackParamList>();
 
 export const HomeNavigator = () => {
+  const {toggleTheme, theme} = useTheme();
   return (
     <Navigator>
       <Screen
@@ -20,6 +21,7 @@ export const HomeNavigator = () => {
           headerTitleStyle: {
             fontFamily: fonts.family.bold,
             fontSize: fonts.size.xl,
+            color: theme.color.primary,
           },
           headerTitleAlign: 'center',
           headerRight: ({tintColor}) => {
@@ -31,7 +33,12 @@ export const HomeNavigator = () => {
                   style={{marginRight: spacing[3]}}
                   name="notifications-outline"
                 />
-                <IonIcon color={tintColor} size={24} name="cart-outline" />
+                <IonIcon
+                  color={tintColor}
+                  onPress={toggleTheme}
+                  size={24}
+                  name="cart-outline"
+                />
               </View>
             );
           },
