@@ -36,6 +36,7 @@ export const HomeScreen: React.FC<IHome.IProps> = ({t}) => {
           <TextInput
             containerStyle={styles.searchBar}
             placeholder={t('Search Product')}
+            rightIcon="search"
           />
 
           {/* Carousel */}

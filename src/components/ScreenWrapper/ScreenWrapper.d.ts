@@ -11,7 +11,7 @@ declare namespace IScreenWrapper {
     statusBarStyle?: StatusBarStyle;
     statusBarHidden?: boolean;
     statusBarAnimation?: StatusBarAnimation;
-    component?: 'scroll' | 'view';
+    component?: 'scroll' | 'view' | 'keyboardView';
     style?: ViewStyle;
   }
 }

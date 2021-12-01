@@ -2,28 +2,27 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/Home/HomeScreen';
-import LoginScreen from '../screens/Login/LoginScreen';
 import {View} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import spacing from '../themes/spacing';
-import {fonts, useTheme} from '../themes';
+import {useTheme} from '../themes';
+import {defaultNativeStackNavigationOptions} from './defaultConfig';
 
 const {Navigator, Screen} =
-  createNativeStackNavigator<INavigator.HomeNavigatorStackParamList>();
+  createNativeStackNavigator<INavigator.MainNavigatorParamList>();
 
-export const HomeNavigator = () => {
+export const MainNavigator = () => {
   const {toggleTheme, theme} = useTheme();
+  const defaultOptions = defaultNativeStackNavigationOptions(theme);
   return (
     <Navigator>
       <Screen
         options={() => ({
-          title: 'Mega Mall',
-          headerTitleStyle: {
-            fontFamily: fonts.family.bold,
-            fontSize: fonts.size.xl,
+          ...defaultOptions,
+          headerTitleStyle: Object.assign(defaultOptions.headerTitleStyle, {
             color: theme.color.primary,
-          },
-          headerTitleAlign: 'center',
+          }),
+          title: 'Mega Mall',
           headerRight: ({tintColor}) => {
             return (
               <View style={{flexDirection: 'row'}}>
@@ -46,9 +45,8 @@ export const HomeNavigator = () => {
         name="Home"
         component={HomeScreen}
       />
-      <Screen name="Login" component={LoginScreen} />
     </Navigator>
   );
 };
 
-export default HomeNavigator;
+export default MainNavigator;

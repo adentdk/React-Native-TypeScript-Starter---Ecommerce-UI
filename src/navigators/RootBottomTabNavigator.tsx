@@ -1,20 +1,23 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import AccountScreen from '../screens/Account/AccountScreen';
 import OnProgressScreen from '../screens/OnProgress';
+import {useAppSelector} from '../store/hooks';
 import {fonts, useTheme} from '../themes';
-import HomeNavigator from './HomeNavigator';
+import MainNavigator from './MainNavigator';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<INavigator.RootTabNavigatorParamList>();
 
 function RootBottomTabNavigator() {
   const {theme} = useTheme();
+  const token = useAppSelector(state => state.auth.token);
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: theme.color.primary,
         tabBarHideOnKeyboard: true,
-        headerShadowVisible: false,
         tabBarLabelStyle: {
           fontFamily: fonts.family.medium,
           fontSize: fonts.size.xs,
@@ -22,7 +25,7 @@ function RootBottomTabNavigator() {
         },
       }}>
       <Tab.Screen
-        name="MainStack"
+        name="Main"
         options={{
           headerShown: false,
           tabBarLabel: 'home',
@@ -30,12 +33,13 @@ function RootBottomTabNavigator() {
             <IonIcon name="home-outline" color={color} size={size} />
           ),
         }}
-        component={HomeNavigator}
+        component={MainNavigator}
       />
       <Tab.Screen
-        name="WistList"
+        name="Wishlist"
         options={{
-          tabBarLabel: 'wistlist',
+          tabBarLabel: 'wishlist',
+          title: 'Wishlist',
           tabBarIcon: ({color, size}) => (
             <IonIcon name="heart-outline" color={color} size={size} />
           ),
@@ -43,9 +47,10 @@ function RootBottomTabNavigator() {
         component={OnProgressScreen}
       />
       <Tab.Screen
-        name="OrderStack"
+        name="Orders"
         options={{
-          tabBarLabel: 'order',
+          tabBarLabel: 'orders',
+          title: 'Orders',
           tabBarIcon: ({color, size}) => (
             <IonIcon name="basket-outline" color={color} size={size} />
           ),
@@ -54,13 +59,25 @@ function RootBottomTabNavigator() {
       />
       <Tab.Screen
         name="Account"
-        options={{
-          tabBarLabel: 'login',
+        options={({navigation}) => ({
+          tabBarButton: tabProps => (
+            <TouchableOpacity
+              {...tabProps}
+              onPress={() => {
+                if (!token) {
+                  navigation.navigate('Login');
+                } else {
+                  navigation.navigate('Account');
+                }
+              }}
+            />
+          ),
+          tabBarLabel: !token ? 'login' : 'account',
           tabBarIcon: ({color, size}) => (
             <IonIcon name="person-outline" color={color} size={size} />
           ),
-        }}
-        component={OnProgressScreen}
+        })}
+        component={AccountScreen}
       />
     </Tab.Navigator>
   );

@@ -7,16 +7,20 @@ import Spacer from '../../components/Spacer';
 import Text from '../../components/Text';
 import TextInput from '../../components/TextInput';
 import {useTheme} from '../../themes';
-import {ILogin} from './Login';
+import {IRegister} from './Register';
 import useStyles from './styles';
 
-export const LoginScreen: React.FC<ILogin.IProps> = ({navigation}) => {
+export const RegisterScreen: React.FC<IRegister.IProps> = ({navigation}) => {
   const {t} = useTranslation();
   const {theme} = useTheme();
   const styles = useStyles();
 
-  const onRegisterPress = () => {
-    navigation.navigate('Register');
+  const onLoginPress = () => {
+    navigation.navigate('Login');
+  };
+
+  const onContinuePress = () => {
+    navigation.navigate('RegisterCodeVerification');
   };
 
   return (
@@ -27,10 +31,10 @@ export const LoginScreen: React.FC<ILogin.IProps> = ({navigation}) => {
             fontFamily="bold"
             fontSize="xxxxl"
             style={styles.spacingBottomText}>
-            {t('Welcome back to\nMega Mall')}
+            {t('Register Account')}
           </Text>
           <Text color={theme.color.inputLabel} style={styles.spacingBottomText}>
-            {t('Please login to your account')}
+            {t('Please enter your email / phone to register')}
           </Text>
           <TextInput
             placeholder={t('Enter your email address / phone number')}
@@ -38,21 +42,19 @@ export const LoginScreen: React.FC<ILogin.IProps> = ({navigation}) => {
             type="email"
             containerStyle={styles.spacingBottomInput}
           />
-          <TextInput
-            placeholder={t('Enter your password')}
-            label="Password"
-            type="password"
-            containerStyle={styles.spacingBottomInput}
-          />
+          <Spacer />
+
           <View style={styles.spacingBottomText} />
-          <DefaultButton title={t('Login')} disabled={true} />
+          <DefaultButton title={t('Continue')} onPress={onContinuePress} />
         </View>
-        <Spacer />
         <View style={styles.footer}>
-          <Text fontFamily="medium">{t('Forgot password')}</Text>
-          <Pressable onPress={onRegisterPress}>
-            <Text fontFamily="medium" color={theme.color.primary}>
-              {t('Register')}
+          <Text fontFamily="medium">{t('Have an Account?')}</Text>
+          <Pressable onPress={onLoginPress}>
+            <Text
+              fontFamily="medium"
+              color={theme.color.primary}
+              style={styles.textLink}>
+              {t('Login')}
             </Text>
           </Pressable>
         </View>
@@ -61,4 +63,4 @@ export const LoginScreen: React.FC<ILogin.IProps> = ({navigation}) => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

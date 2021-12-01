@@ -1,11 +1,11 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-declare namespace ILogin {
+declare namespace IRegister {
   export interface IProps
     extends NativeStackScreenProps<
       INavigator.RootNavigatorParamList,
-      'Login'
+      'Register'
     > {}
 }
 
-export {ILogin};
+export {IRegister};

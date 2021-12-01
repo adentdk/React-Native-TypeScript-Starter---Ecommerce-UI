@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native';
 import React from 'react';
 import {useTheme} from '../themes';
-import RootBottomTabNavigator from './RootBottomTabNavigator';
+import RootNavigator from './RootNavigator';
 
 export const AppNavigator = () => {
   const {theme} = useTheme();
@@ -34,7 +34,7 @@ export const AppNavigator = () => {
 
   return (
     <NavigationContainer theme={navigationTheme}>
-      <RootBottomTabNavigator />
+      <RootNavigator />
     </NavigationContainer>
   );
 };

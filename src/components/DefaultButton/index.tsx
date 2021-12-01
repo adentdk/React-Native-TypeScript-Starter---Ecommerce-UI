@@ -20,7 +20,12 @@ export const DefaultButton: React.FC<IDefaultButton.IProps> = ({
   const titleColorValue = titleColor || palettes.white;
   return (
     <TouchableOpacity
-      style={[styles.root, {backgroundColor: buttonColor}, style]}
+      style={[
+        styles.root,
+        {backgroundColor: buttonColor},
+        disabled && {backgroundColor: theme.color.dim},
+        style,
+      ]}
       onPress={onPress}
       disabled={disabled}>
       <Text fontFamily="medium" color={titleColorValue}>
